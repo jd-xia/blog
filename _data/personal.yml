@@ -9,7 +9,7 @@
   #activate the social buttons you like by removing the comment
   social:
     github:
-      url: "http://github.com/yourid"
+      url: "http://github.com/douglasjd"
       text: "/douglasjd"
       btnClass: "btn-github"
       logo: "fa-github"
