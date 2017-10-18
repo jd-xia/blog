@@ -1,0 +1,15 @@
+---
+  name: “Douglas JD”
+  position: “Software Engineer”
+  location: “Singapore”
+  email: “xiajiandao@gmail.com”
+  gravatar: "http://api.adorable.io/avatars/300/abott@adorable.png"
+  bio: |
+    Plan Well, Act Well.
+  #activate the social buttons you like by removing the comment
+  social:
+    github:
+      url: "http://github.com/yourid"
+      text: "/douglasjd"
+      btnClass: "btn-github"
+      logo: "fa-github"
