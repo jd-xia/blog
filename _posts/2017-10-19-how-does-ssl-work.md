@@ -1,11 +1,12 @@
 ---
-layout: post
-tags: SSL
-date: 2017-10-19 17:28
-thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg
 title: How does SSL works
-published: true
+date: 2017-10-19 17:28:00 Z
+tags:
+- SSL
+layout: post
+thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg
 ---
+
 Guide
 ============
 - SSL work flow
