@@ -11,19 +11,43 @@ Guide
 ============
 - SSL work flow
 - Create a keystore and generate the key pair in server
-- Create a selfsigned cert in serer.
-- Create a keystore and generate the key pair in client
-- Create a selfsigned cert in client.
-- Import selfsigned cert (Server) in client truststore.
-- Import selfsigned cert (Client) in server truststore.
+- Export self-signed certification from keystore.
+- Create a keystore and generate key pair in client and export the self-signed cert.
+- Import self-signed cert (Server) in client truststore.
+- Import self-signed cert (Client) in server truststore.
 - Enable SSLv3 in JAVA8
 - Custimize Keystore and truststore manager and create a SSLSocketServer
 - Custimize Keystore and truststore manager and create a SSLSocketServer
 
-Create a key store and generate the key pair in server
+Create a keystore and generate the key pair in server
 ============
 The first thing you need to do is create a keystore and generate the key pair. You could use a command such as the following:
 ```
-keytool -genkeypair -dname "cn=jd, ou=Java, o=Oracle, c=SG"
-      -alias sslkeys -keypass password1 -keystore svr_keystore.jks  -storepass password1 -validity 180
+D:\>keytool -genkeypair -alias sslkeys -validity 180
+Enter keystore password:password1
+What is your first and last name?
+  [Unknown]:  jd
+What is the name of your organizational unit?
+  [Unknown]:  java
+What is the name of your organization?
+  [Unknown]:  oracle
+What is the name of your City or Locality?
+  [Unknown]:  sg
+What is the name of your State or Province?
+  [Unknown]:  sg
+What is the two-letter country code for this unit?
+  [Unknown]:  65
+Is CN=jd, OU=java, O=oracle, L=sg, ST=sg, C=65 correct?
+  [no]:  yes
+
+Enter key password for <sslkeys>
+        (RETURN if same as keystore password):
+Re-enter new password:password2
+D:\>
+```
+
+Export self-signed certification from keystore.
+==========
+```
+keytool -export -keystore svr_keystore.jks -alias svr_cert -file svr_selfsigned.cer
 ```
