@@ -17,8 +17,8 @@ Guide
 - Import selfsigned cert (Server) in client truststore.
 - Import selfsigned cert (Client) in server truststore.
 - Enable SSLv3 in JAVA8
-- Custimize Key and trust manage and create a SSLSocketServer
-- Custimize Key and trust manage and create a SSLSocketServer
+- Custimize Keystore and truststore manager and create a SSLSocketServer
+- Custimize Keystore and truststore manager and create a SSLSocketServer
 
 Create a key store and generate the key pair in server
 ============
