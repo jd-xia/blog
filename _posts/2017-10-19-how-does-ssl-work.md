@@ -91,12 +91,12 @@ Certificate was added to keystore
 Enable SSLv3 (Optional)
 ===================
 
-- Empty the disable algorithm list
+Empty the disable algorithm list
 ```
 Security.setProperty("jdk.tls.disabledAlgorithms", "");
 ```
 
--Retrieve the SSLv3 context
+Retrieve the SSLv3 context
 ```
 final SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
 ```
