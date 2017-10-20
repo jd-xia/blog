@@ -20,7 +20,6 @@ Guide
 - Source Code (SSL Socket Server)
 - Source Code (SSL Socket Client)
 
-<!--more-->
 
 Create a keystore and generate the key pair.
 ============
@@ -30,6 +29,8 @@ $  keytool -genkeypair -dname "cn=Douglas JD, ou=JavaSoft, o=Oracle, c=SG" -alia
 ```
 
 Here the command was named -genKey in earlier release.  While the old one is till supproted, -genkeypair is preferred going forward.
+
+<!--more-->
 
 
 Export self-signed certification from keystore.
