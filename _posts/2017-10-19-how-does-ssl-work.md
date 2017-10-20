@@ -6,9 +6,8 @@ tags:
 - CSR
 - Keytool
 layout: post
-thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg 100x100
+thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg
 ---
-
 Guide
 ============
 - SSL related knowledge
