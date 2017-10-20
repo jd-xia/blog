@@ -13,6 +13,7 @@ Guide
 - Create a keystore and generate the key pair.
 - Export self-signed certification from keystore.
 - Create a new truststore
+- Generate a CSR and Request a Signed Certificate from a CA (Optional)
 - Enable SSLv3 (Optional)
 - Source Code (SSL Socket Server)
 - Source Code (SSL Socket Client)
@@ -88,6 +89,7 @@ KeyIdentifier [
 Trust this certificate? [no]:  yes
 Certificate was added to keystore
 ```
+
 Enable SSLv3 (Optional)
 ===================
 
@@ -101,31 +103,36 @@ Retrieve the SSLv3 context
 final SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
 ```
 
+
+Generate a CSR and Request a Signed Certificate from a CA (Optional)
+==========================
+If you want the cert be signed from a CA, you need to create a CSR(Certificate Signing Request) file and submit to a CA.
+I am not going to go detail on this section as we use self-signed cert.
+
+
 Souce Code (SSL Server Socket)
 ====================
 ```
+
 package sample.security.socket;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
 import java.security.KeyStore;
 import java.security.Security;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
 import lombok.extern.slf4j.Slf4j;
 import sample.security.socket.util.SecurityUtils;
 
 @Slf4j
-public class SSLClientSocket {
+public class SSLServerSocket {
 
 	static {
 
@@ -147,7 +154,7 @@ public class SSLClientSocket {
 
 		System.setProperty("socket.security.protocol", "SSLv3");
 		System.setProperty("socket.security.port", "8087");
-		System.setProperty("socket.security.serverip", "127.0.0.1");
+		System.setProperty("socket.security.buffer.size", "2048");
 
 	}
 
@@ -160,12 +167,11 @@ public class SSLClientSocket {
 			KEY_PASSWORD = System.getProperty("javax.net.ssl.keyPassword"),
 
 			TRUSTSTORE_FILE = System.getProperty("javax.net.ssl.trustStore"),
-			TRUSTSTORE_PASSWORD = System.getProperty("javax.net.ssl.trustStorePassword"),
-			SERVER_IP = System.getProperty("socket.security.serverip");
+			TRUSTSTORE_PASSWORD = System.getProperty("javax.net.ssl.trustStorePassword");
 
 	public static void main(String[] args) throws Exception {
-		log.info("Starting SSL Socket Client...");
-		// log.debug("Port: {}, Protocol: {}", PORT, PROTOCOL);
+		log.info("Starting server...");
+		log.debug("Port: {}, Protocol: {}", PORT, PROTOCOL);
 
 		log.debug("Keystore File: {}", KEYSTORE_FILE);
 		KeyManagerFactory kmf = null;
@@ -184,144 +190,60 @@ public class SSLClientSocket {
 			tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 			tmf.init(trustStore);
 		}
-
 		final SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
 		sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 		log.debug("SSL Context initialized");
 
-		SSLSocketFactory socketFactory = sslContext.getSocketFactory();
 
-		SSLSocket client = (SSLSocket) socketFactory.createSocket(SERVER_IP, PORT);
+		try {
+			final SSLServerSocketFactory sslServerSocketfactory = sslContext.getServerSocketFactory();
+			ServerSocket sslServerSocket = sslServerSocketfactory.createServerSocket(PORT);
+			log.debug("Server socket created");
+			log.info("Server started and listening for connection @ {} for {}", PORT, PROTOCOL);
 
-		/*
-		 * send http request
-		 *
-		 * Before any application data is sent or received, the SSL socket will do SSL
-		 * handshaking first to set up the security attributes.
-		 *
-		 * SSL handshaking can be initiated by either flushing data down the pipe, or by
-		 * starting the handshaking by hand.
-		 *
-		 * Handshaking is started manually in this example because PrintWriter catches
-		 * all IOExceptions (including SSLExceptions), sets an internal error flag, and
-		 * then returns without throwing the exception.
-		 *
-		 * Unfortunately, this means any error messages are lost, which caused lots of
-		 * confusion for others using this code. The only way to tell there was an error
-		 * is to call PrintWriter.checkError().
-		 */
-		client.startHandshake();
-
-		BufferedInputStream is = new BufferedInputStream(client.getInputStream());
-		BufferedOutputStream os = new BufferedOutputStream(client.getOutputStream());
-
-		os.write("Hellp SSL Server!\n".getBytes());
-		os.flush();
-
-		final byte[] buffer = new byte[BUFFER_SIZE];
-		String serverMessage = "";
-		for (int len = is.read(buffer); len >= 0; len = is.read(buffer)) {
-			serverMessage += new String(buffer, 0, len);
-			if (serverMessage.endsWith("\n")) {
-				break;
+			BufferedInputStream is = null;
+			BufferedOutputStream os = null;
+			while (true) {
+				final SSLSocket sslSocket = (SSLSocket) sslServerSocket.accept();
+				log.info("Accept connection from client {}", sslSocket.getInetAddress());
+				is = new BufferedInputStream(sslSocket.getInputStream());
+				os = new BufferedOutputStream(sslSocket.getOutputStream());
+				//
+				final byte[] buffer = new byte[BUFFER_SIZE];
+				String clientMessage = "";
+				for (int len = is.read(buffer); len >= 0; len = is.read(buffer)) {
+					clientMessage += new String(buffer, 0, len);
+					if (clientMessage.endsWith("\n")) {
+						break;
+					}
+				}
+				log.debug("Received SSL Client Message:\r\n{}",clientMessage);    
+				os.write("Hello Client\n".getBytes());
+				os.flush();
 			}
-		}
-		log.debug("Received SSL Client Message:\r\n{}", serverMessage);
 
+		} finally {
+			log.info("Shutdown server started...");
+		}
 	}
 
 }
-
 ```
 
 
 Source Code (SSL Socket Client)
 ====================
 ```
-package sample.security.socket;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.security.KeyStore;
-import java.security.Security;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManagerFactory;
-
-import lombok.extern.slf4j.Slf4j;
-import sample.security.socket.util.SecurityUtils;
 
 @Slf4j
 public class SSLClientSocket {
 
-	static {
 
-		// You can set below setting in gradle as below.
-		// applicationDefaultJvmArgs = [
-		// "-Djavax.net.ssl.keyStore=./keystore.jks",
-		// "-Djavax.net.ssl.keyStorePassword=Password1",
-		// ]
-		// SSLv3 is included in default disabled algorithms. It resets disabled
-		// algorithms and supports SSLv3.
-		Security.setProperty("jdk.tls.disabledAlgorithms", "");
-
-		System.setProperty("javax.net.ssl.keyStore", "cli_keystore.jks");
-		System.setProperty("javax.net.ssl.storePassword", "pass321");
-		System.setProperty("javax.net.ssl.keyPassword", "pass123");
-
-		System.setProperty("javax.net.ssl.trustStore", "cli_truststore.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "pass4321");
-
-		System.setProperty("socket.security.protocol", "SSLv3");
-		System.setProperty("socket.security.port", "8087");
-		System.setProperty("socket.security.serverip", "127.0.0.1");
-
-	}
-
-	static final int BUFFER_SIZE = Integer.parseInt(System.getProperty("socket.security.buffer.size", "2048"));
-	static final int PORT = Integer.parseInt(System.getProperty("socket.security.port", "8070"));
-	static final String PROTOCOL = System.getProperty("socket.security.protocol", "SSLv3");
-
-	static final String KEYSTORE_FILE = System.getProperty("javax.net.ssl.keyStore"),
-			STORE_PASSWORD = System.getProperty("javax.net.ssl.storePassword"),
-			KEY_PASSWORD = System.getProperty("javax.net.ssl.keyPassword"),
-
-			TRUSTSTORE_FILE = System.getProperty("javax.net.ssl.trustStore"),
-			TRUSTSTORE_PASSWORD = System.getProperty("javax.net.ssl.trustStorePassword"),
-			SERVER_IP = System.getProperty("socket.security.serverip");
 
 	public static void main(String[] args) throws Exception {
 		log.info("Starting SSL Socket Client...");
-		// log.debug("Port: {}, Protocol: {}", PORT, PROTOCOL);
 
-		log.debug("Keystore File: {}", KEYSTORE_FILE);
-		KeyManagerFactory kmf = null;
-		if (KEYSTORE_FILE != null && STORE_PASSWORD != null) {
-			final KeyStore keyStore = SecurityUtils.loadFromFile(KEYSTORE_FILE, STORE_PASSWORD);
-			log.debug("Key Store loaded");
-			kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-			kmf.init(keyStore, KEY_PASSWORD.toCharArray());
-		}
-
-		log.debug("Truststore File: {}", TRUSTSTORE_FILE);
-		TrustManagerFactory tmf = null;
-		if (TRUSTSTORE_FILE != null && TRUSTSTORE_PASSWORD != null) {
-			final KeyStore trustStore = SecurityUtils.loadFromFile(TRUSTSTORE_FILE, TRUSTSTORE_PASSWORD);
-			log.debug("Trust Store loaded");
-			tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-			tmf.init(trustStore);
-		}
-
-		final SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
-		sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
-		log.debug("SSL Context initialized");
+		//Skip the code to initilize sslContext. Please refer to SSLServerSocket
 
 		SSLSocketFactory socketFactory = sslContext.getSocketFactory();
 
@@ -367,10 +289,10 @@ public class SSLClientSocket {
 }
 
 ```
-Note,
-As I tested both server and client in same PC, I only created one keystore and truststore.
-If you want to run in two servers, you need to create two pairs.
-1. svr_keystore.  (Created in SSLServerSocket Server).
+**Note,
+The example is tested in same server.  
+If you want to run in two servers, you need to create two pairs of keystore and trust store.
+1. svr_keystore.  
 2. svr_truststore. (Import the cert from SSLClientSocket Server)
-3. cli_keystore. (Created in SSLClientSocket server)
+3. cli_keystore.
 4. cli_truststore. (Import the cert from SSLServerSocket server)
