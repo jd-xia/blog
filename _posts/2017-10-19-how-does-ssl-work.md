@@ -1,7 +1,10 @@
 ---
 title: How does SSL works
 date: 2017-10-19 17:28:00 Z
-tags: SSL CSR Keytool
+tags:
+- SSL
+- CSR
+- Keytool
 layout: post
 thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg 100x100
 ---
