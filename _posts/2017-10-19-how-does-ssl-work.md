@@ -20,6 +20,8 @@ Guide
 - Source Code (SSL Socket Server)
 - Source Code (SSL Socket Client)
 
+<!--more-->
+
 Create a keystore and generate the key pair.
 ============
 The first thing you need to do is create a keystore and generate the key pair. You could use a command such as the following:
@@ -95,7 +97,7 @@ Certificate was added to keystore
 Enable SSLv3 (Optional)
 ===================
 
-Empty the disable algorithm list
+Empty the disabled algorithm list
 ```
 Security.setProperty("jdk.tls.disabledAlgorithms", "");
 ```
@@ -292,8 +294,8 @@ public class SSLClientSocket {
 
 ```
 **Note,
-The example is tested in same server.  
-If you want to run in two servers, you need to create two pairs of keystore and trust store.
+This SSLServer and SSLclient application are running on same servers in this example.
+If you want to deploy SSLServer and SSLClient applicaiton in different servers, you need to create two pairs of keystore and truststore.
 1. svr_keystore.  
 2. svr_truststore. (Import the cert from SSLClientSocket Server)
 3. cli_keystore.
