@@ -1,5 +1,5 @@
 ---
-title: How does SSL works
+title: How does SSL work
 date: 2017-10-19 17:28:00 Z
 tags:
 - SSL
@@ -11,7 +11,7 @@ thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg
 
 Guide
 ============
-- SSL related knowledge
+- Helpful information
 - Create a keystore and generate the key pair.
 - Export self-signed certification from keystore.
 - Create a new truststore
@@ -298,6 +298,6 @@ public class SSLClientSocket {
 This SSLServer and SSLclient application are running on same servers in this example.
 If you want to deploy SSLServer and SSLClient applicaiton in different servers, you need to create two pairs of keystore and truststore.
 1. svr_keystore.  
-2. svr_truststore. (Import the cert from SSLClientSocket Server)
+2. svr_truststore. (Import the cert from SSL Client Application Server)
 3. cli_keystore.
-4. cli_truststore. (Import the cert from SSLServerSocket server)
+4. cli_truststore. (Import the cert from SSL Server Application Server)
