@@ -36,6 +36,7 @@ Establishing the encrypted channel using certificate-based 2-Way SSL involves:
     If successful, the server grants access to the protected resource requested by the client.
 
 ![SSL Two Way](https://douglasjd.github.io/blog/images/ssl_twoway.gif)
+Reference: http://www.ossmentor.com/2015/03/one-way-and-two-way-ssl-and-tls.html
 
 Create a keystore and generate the key pair.
 ============
