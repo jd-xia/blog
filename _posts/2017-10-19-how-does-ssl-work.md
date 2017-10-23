@@ -20,8 +20,6 @@ Guide
 - Source Code (SSL Socket Server)
 - Source Code (SSL Socket Client)
 
-<!--more-->
-
 
 Helpful information
 ===============
@@ -34,8 +32,10 @@ Establishing the encrypted channel using certificate-based 2-Way SSL involves:
     If successful, the client sends its certificate to the server.
     The server verifies the client’s credentials.
     If successful, the server grants access to the protected resource requested by the client.
+    <!--more-->
 
 ![SSL Two Way](https://douglasjd.github.io/blog/images/ssl_twoway.gif)
+
 Reference: http://www.ossmentor.com/2015/03/one-way-and-two-way-ssl-and-tls.html
 
 Create a keystore and generate the key pair.
