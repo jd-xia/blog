@@ -24,8 +24,6 @@ Helpful information
 ===============
 
 2-way SSL (Mutual or Client Authentication)
-Note client Authentication is optional by default only 1-way SSL Server Authentication.
-
 Establishing the encrypted channel using certificate-based 2-Way SSL involves:
     A client requests access to a protected resource.
     The server presents its certificate to the client.
