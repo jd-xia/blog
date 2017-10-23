@@ -19,6 +19,7 @@ Guide
 - Enable SSLv3 (Optional)
 - Source Code (SSL Socket Server)
 - Source Code (SSL Socket Client)
+- Reference
 
 
 Helpful information
@@ -36,7 +37,6 @@ Establishing the encrypted channel using certificate-based 2-Way SSL involves:
 
 ![SSL Two Way](https://douglasjd.github.io/blog/images/ssl_twoway.gif)
 
-Reference: http://www.ossmentor.com/2015/03/one-way-and-two-way-ssl-and-tls.html
 
 Create a keystore and generate the key pair.
 ============
@@ -310,10 +310,15 @@ public class SSLClientSocket {
 }
 
 ```
-**Note,
+Note,
 This SSLServer and SSLclient application are running on same servers in this example.
 If you want to deploy SSLServer and SSLClient applicaiton in different servers, you need to create two pairs of keystore and truststore.
 1. svr_keystore.  
 2. svr_truststore. (Import the cert from SSL Client Application Server)
 3. cli_keystore.
 4. cli_truststore. (Import the cert from SSL Server Application Server)
+
+
+Reference:
+===============
+http://www.ossmentor.com/2015/03/one-way-and-two-way-ssl-and-tls.html
