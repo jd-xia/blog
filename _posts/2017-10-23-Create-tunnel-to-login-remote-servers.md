@@ -23,8 +23,8 @@ Preparation
 <!--more-->
 
 - Create a user in server B.</br>
-  User: revtunnel             </br>
-  Password: tunnel123      </br>
+  User: "revtunnel"</br>
+  Password: "revtunnel123"</br>
 
 - Grant Server A has permission to access port 1022 at server B
 - Grant Server C has permission to access port 80 at server B
@@ -44,6 +44,7 @@ Practise
 - Go to server C and execute below command
 ```
 ssh -f -N -R 50.0.0.100:1022:172.0.0.100:22 revtunnel@50.0.0.100 -p 80
+password:
 ```
 - Open Putty to connect 10.0.0.100:1022 (It requires login user and password.)
 - It will automatically connect to remote server 172.0.0.100
