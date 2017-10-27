@@ -2,9 +2,9 @@
 title: How to use SSH tunneling to access restricted Servers.
 date: 2017-10-23 17:28:00 Z
 tags:
-- ssh
+- ssh tunnel
 layout: post
-thumbnail: https://douglasjd.github.io/blog/images/ssh.jpg
+thumbnail: https://douglasjd.github.io/blog/images/ssh.png
 ---
 
 Guide
