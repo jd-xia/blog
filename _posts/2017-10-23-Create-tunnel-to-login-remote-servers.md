@@ -21,6 +21,8 @@ Useful Information
 - Linux   Server B: 50.0.0.100:    Local Server External IP (Another Network Interface)
 - Linux   Server C: 172.0.0.100:   Remote Server Extermal IP
 
+<!--more-->
+
 Preparation
 =====================
 - Create a user in server B.</br>
