@@ -48,3 +48,7 @@ password:
 ```
 - Open Putty to connect 10.0.0.100:1022 (It requires login user and password.)
 - It will automatically connect to remote server 172.0.0.100
+
+Reference
+=================
+https://www.garron.me/en/bits/iptables-open-port-for-specific-ip.html
