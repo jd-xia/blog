@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 ------
 
 2018-08-16-Set-Up-Git-In-Local-Server
+=======
+---
+title: Set Up Git In Local Server
+date: 2018-08-16 00:00:00 Z
+---
+
+## 2018-08-16-Set-Up-Git-In-Local-Server
+>>>>>>> 5d48952d7e87333ef48ebd58b0283432aa491ef2
 
 title:  Set Up Git In Local Server
 date: 2018-08-16 11:15:00 Z
