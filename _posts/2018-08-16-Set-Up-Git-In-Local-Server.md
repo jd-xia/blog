@@ -1,12 +1,15 @@
-## 2018-08-16-Set-Up-Git-In-Local-Server
+------
+
+2018-08-16-Set-Up-Git-In-Local-Server
 
 title:  Set Up Git In Local Server
 date: 2018-08-16 11:15:00 Z
 tags:
 
 - Git Local Server
+- SSH
   layout: post
-  thumbnail: http://placehold.it/100x100
+  thumbnail: https://douglasjd.github.io/blog/images/git.png
 
 ------
 
