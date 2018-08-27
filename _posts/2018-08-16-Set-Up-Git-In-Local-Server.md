@@ -6,7 +6,7 @@ tags:
 - SSH
 - Source Tree
 layout: post
-thumbnail: https://douglasjd.github.io/blog/images/git.jpg
+thumbnail: https://douglasjd.github.io/blog/images/git.png
 ---
 
 
