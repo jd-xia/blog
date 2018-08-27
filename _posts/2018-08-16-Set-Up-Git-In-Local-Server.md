@@ -4,7 +4,6 @@ date: 2018-08-27 17:28:00 Z
 tags:
 - Git
 - SSH
-- Git-Bash
 - Source Tree
 layout: post
 thumbnail: https://douglasjd.github.io/blog/images/git.jpg
