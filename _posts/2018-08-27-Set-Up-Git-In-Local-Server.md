@@ -9,7 +9,6 @@ layout: post
 thumbnail: https://douglasjd.github.io/blog/images/git.jpg
 ---
 
-
 ## Local Server - Window 10
 
 ### Create SSH Key
