@@ -12,6 +12,7 @@ thumbnail: https://douglasjd.github.io/blog/images/git.jpg
 
 ## Local Server - Window 10
 
+
 ### Create SSH Key
 
 - Go to https://git-scm.com/downloads down load git 
@@ -23,6 +24,7 @@ thumbnail: https://douglasjd.github.io/blog/images/git.jpg
   ```shell
   ssh-keygen -t rsa -C "your_email@example.com"
   ```
+<!--more-->
 
 - Associating the key with your email address helps you to identify the key later on. 
 
