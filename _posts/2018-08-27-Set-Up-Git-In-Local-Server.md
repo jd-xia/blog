@@ -9,7 +9,6 @@ layout: post
 thumbnail: https://douglasjd.github.io/blog/images/git.png
 ---
 
-
 ## Local Server - Window 10
 
 
