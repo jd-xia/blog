@@ -1,26 +1,15 @@
-<<<<<<< HEAD
-------
-
-2018-08-16-Set-Up-Git-In-Local-Server
-=======
 ---
-title: Set Up Git In Local Server
-date: 2018-08-16 00:00:00 Z
----
-
-## 2018-08-16-Set-Up-Git-In-Local-Server
->>>>>>> 5d48952d7e87333ef48ebd58b0283432aa491ef2
-
-title:  Set Up Git In Local Server
-date: 2018-08-16 11:15:00 Z
+title: Set Up Private Git Service
+date: 2018-08-27 17:28:00 Z
 tags:
-
-- Git Local Server
+- Git
 - SSH
-  layout: post
-  thumbnail: https://douglasjd.github.io/blog/images/git.png
+- Git-Bash
+- Source Tree
+layout: post
+thumbnail: https://douglasjd.github.io/blog/images/git.jpg
+---
 
-------
 
 ## Local Server - Window 10
 
