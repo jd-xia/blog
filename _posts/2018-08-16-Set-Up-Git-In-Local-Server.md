@@ -1,3 +1,8 @@
+---
+title: Set Up Git In Local Server
+date: 2018-08-16 00:00:00 Z
+---
+
 ## 2018-08-16-Set-Up-Git-In-Local-Server
 
 title:  Set Up Git In Local Server
