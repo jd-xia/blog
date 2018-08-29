@@ -1,18 +1,13 @@
 ---
-
 title: Set Up Private Git Service
 date: 2018-08-27 17:28:00 Z
 tags:
-
 - Git
 - SSH
 - Source Tree
 layout: post
 thumbnail: https://douglasjd.github.io/blog/images/git.png
-
 ---
-
-
 
 Generate RSA Key
 
