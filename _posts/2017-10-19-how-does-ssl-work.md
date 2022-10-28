@@ -6,7 +6,7 @@ tags:
 - CSR
 - Keytool
 layout: post
-thumbnail: https://douglasjd.github.io/blog/images/ssl.jpg
+thumbnail: https://jd-xia.github.io/blog/images/ssl.jpg
 ---
 
 ##Guide
@@ -35,7 +35,7 @@ Establishing the encrypted channel using certificate-based 2-Way SSL involves:
     If successful, the server grants access to the protected resource requested by the client.
     <!--more-->
 
-![SSL Two Way](https://douglasjd.github.io/blog/images/ssl_twoway.gif)
+![SSL Two Way](https://jd-xia.github.io/blog/images/ssl_twoway.gif)
 
 
 ##Create a keystore and generate the key pair.
